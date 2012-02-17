@@ -34,10 +34,12 @@ def testAll():
 
     for testFileName, testOutputFile in zip(testFiles, outputFiles):
         expectedOutput = open(testOutputFile).read()
-        actualOutput = subprocess.check_output(RUN_COMMAND + "'" + testFileName + "'" + '; exit 0', stderr=subprocess.STDOUT, shell=True)
+        actualOutput = subprocess.check_output(RUN_COMMAND + "'" + testFileName + "'" + '; exit 0',
+                                               stderr=subprocess.STDOUT, shell=True)
 
         def areEqual(expected, actual):
-          # only compare the first line of expected and actual if the output expects an error (since stack traces won't match)
+          # only compare the first line of expected and actual if the output expects
+          # an error (since stack traces won't match)
             if re.search('cs162\..*', expected):
                 expected = expected.splitlines()[0]
                 actual = actual.splitlines()[0]
